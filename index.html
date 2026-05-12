@@ -3,345 +3,377 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>J.J Components | Electrónica y mas</title>
+  <title>J.J Components | Electrónica Profesional</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
+    :root {
+      --verde-oscuro: #166534;
+      --verde-principal: #1e8834;
+      --verde-acento: #4ade80;
     }
-  
-    header {
-      background-color: #1e3a8a;
-      color: white;
-      padding: 15px 0;
-      text-align: center;
-    }
-  
-    .logo {
-      font-size: 2.5rem;
-      font-weight: bold;
-    }
-  
-    nav {
-      background-color: #1e40af;
-      padding: 12px;
-      text-align: center;
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background:#f8fafc; color:#333; line-height:1.6; }
+
+    header { background: var(--verde-oscuro); color: white; padding: 1.2rem 0; }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       gap: 15px;
     }
-  
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.1rem;
+    .logo img { height: 120px; width: auto; }
+
+    nav {
+      background: var(--verde-principal);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    /* Barra de búsqueda */
-    .search-container {
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
       display: flex;
-      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .nav-container a { color: white; text-decoration: none; font-weight: 500; }
+    .nav-container a:hover { color: var(--verde-acento); }
+
+    .dropdown { position: relative; display: inline-block; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
       background: white;
-      border-radius: 25px;
-      padding: 5px 10px;
-      max-width: 350px;
-      width: 100%;
+      min-width: 260px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      z-index: 1;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
     }
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      display: block;
+    }
+    .dropdown-content a:hover { background: #f0fdf4; color: var(--verde-principal); }
+    .dropdown:hover .dropdown-content { display: block; }
 
-    .search-container input {
-      border: none;
-      outline: none;
-      padding: 8px 12px;
-      width: 100%;
-      font-size: 1rem;
-    }
-
-    .search-container button {
-      background-color: #1e40af;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
+    main { max-width: 1200px; margin: 0 auto; padding: 20px; min-height: 80vh; }
 
     .hero {
-      background-color: #1e40af;
+      background: linear-gradient(135deg, var(--verde-principal), var(--verde-oscuro));
       color: white;
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
+      border-radius: 12px;
+      margin-bottom: 40px;
     }
-    .section {
-      padding: 40px 20px;
-      text-align: center;
-    }
+
     .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
     }
-  
+
     .card {
       background: white;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      width: 280px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
     }
-  
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-  
-    .card h3 {
-      margin: 10px 0 5px;
-    }
-  
-    .btn-comprar {
-      background-color: #1e40af;
+    .card:hover { transform: translateY(-10px); }
+    .card img { width: 100%; height: 200px; object-fit: cover; }
+
+    .btn {
+      background: var(--verde-principal);
       color: white;
-      padding: 10px 20px;
       border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 10px 0;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      z-index: 1000;
-    }
-  
-    .modal-content {
-      background: white;
-      margin: 5% auto;
-      padding: 20px;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 10px;
-      text-align: center;
-    }
-    form {
-      max-width: 500px;
-      margin: 0 auto;
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-  
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-  
-    button {
-      background-color: #1e40af;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1.1rem;
+      padding: 12px 20px;
+      border-radius: 8px;
       cursor: pointer;
       width: 100%;
-    }
-    .redes-sociales {
-      margin-top: 25px;
-    }
-   
-    .redes-sociales a {
-      color: #1e40af;
-      font-size: 1.5rem;
-      margin: 0 12px;
-      text-decoration: none;
+      font-weight: bold;
+      margin-top: 10px;
     }
 
-    /* Pie de página mejorado */
+    .category-title { color: var(--verde-oscuro); margin: 30px 0 20px; }
+
     footer {
-      background-color: #1e3a8a;
+      background: var(--verde-oscuro);
       color: white;
       text-align: center;
       padding: 40px 20px;
-      margin-top: 50px;
+      margin-top: 60px;
     }
 
-    .footer-content {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin: 20px 0;
-    }
-
-    .footer-links a {
+    .cart-icon {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      background: var(--verde-principal);
       color: white;
-      text-decoration: none;
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 1000;
     }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
   <header>
-    <div class="logo">J.J Components</div>
+    <div class="header-content">
+      <div class="logo">
+        <img src="LogoPrinsipal.png" alt="J.J Components Logo">
+      </div>
+    </div>
   </header>
 
+  <!-- NAVEGACIÓN -->
   <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#productos">Productos</a>
-    <a href="#cuenta">Crear Cuenta</a>
-    <a href="#contacto">Contacto</a>
+    <div class="nav-container">
+      <a href="#" onclick="showPage('home')">Inicio</a>
+      <a href="#" onclick="showPage('products')">Todos los Productos</a>
+      
+      <div class="dropdown">
+        <a href="#" style="cursor:pointer;">Categorías ▼</a>
+        <div class="dropdown-content">
+          <a href="#" onclick="showCategory('kits')">Kits de Electrónica</a>
+          <a href="#" onclick="showCategory('micro')">Microcontroladores</a>
+          <a href="#" onclick="showCategory('leds')">LEDs e Iluminación</a>
+          <a href="#" onclick="showCategory('sensores')">Sensores</a>
+          <a href="#" onclick="showCategory('diodos')">Diodos y Transistores</a>
+          <a href="#" onclick="showCategory('herramientas')">Herramientas</a>
+        </div>
+      </div>
 
-    <!-- Barra de búsqueda -->
-    <form id="searchForm" class="search-container">
-      <input type="text" id="searchInput" placeholder="Buscar productos...">
-      <img src="https://img.icons8.com/?size=160&id=e4NkZ7kWAD7f&format=png" alt="Buscar" style="width: 20px; height: 20px;">
-      <button type="submit">Buscar</button>
-    </form>
+      <a href="#" onclick="showPage('contact')">Contacto</a>
+      <a href="#" onclick="showPage('cart')">🛒 Carrito (<span id="navCartCount">0</span>)</a>
+    </div>
   </nav>
 
-  <section id="inicio" class="hero">
-    <h1>Bienvenidos a J.JComponents</h1>
-    <p>Tu tienda de electrónica en Panamá</p>
-  </section>
+  <main id="main-content">
 
-  <!-- PRODUCTOS -->
-  <section id="productos" class="section" style="background:white;">
-    <h2>Productos Destacados</h2>
-  
-    <div class="cards">
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/51Ci8gnvlAL._AC_SX466_.jpg" alt="Arduino">
-        <div style="padding:15px;">
-          <h3>Arduino Uno</h3>
-          <p><strong>$24.99</strong></p>
-          <button class="btn-comprar" onclick="comprar('Arduino Uno', 24.99)">Comprar</button>
-        </div>
-      </div>
-    
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/71HeXwnzjbL._AC_SX679_.jpg" alt="LED">
-        <div style="padding:15px;">
-          <h3>Tira LED RGB 5m</h3>
-          <p><strong>$14.99</strong></p>
-          <button class="btn-comprar" onclick="comprar('Tira LED RGB', 14.99)">Comprar</button>
-        </div>
-      </div>
-    
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/81hR7vU0xQL._AC_SY879_.jpg" alt="Kit">
-        <div style="padding:15px;">
-          <h3>Kit Básico Electrónica</h3>
-          <p><strong>$39.99</strong></p>
-          <button class="btn-comprar" onclick="comprar('Kit Básico Electrónica', 39.99)">Comprar</button>
-        </div>
-      </div>
+    <!-- INICIO -->
+    <div id="page-home" class="page">
+      <section class="hero">
+        <h1>Bienvenidos a J.J Components</h1>
+        <p>Tu tienda especializada en componentes electrónicos en Panamá</p>
+      </section>
+
+      <section>
+        <h2 class="category-title">Productos Destacados</h2>
+        <div class="cards" id="destacados"></div>
+      </section>
     </div>
-  </section>
 
-  <!-- VIDEO -->
-  <section class="section">
-    <h2>Video Recomendado</h2>
-    <iframe width="360" height="640"
-      src="https://www.youtube.com/embed/q-jeD6gANcQ"
-      title="YouTube video player"
-      frameborder="0"
-      allowfullscreen>
-    </iframe>
-  </section>
-
-  <!-- CONTACTO -->
-  <section id="contacto" class="section">
-    <h2>Contáctanos</h2>
-    <p>WhatsApp: <strong>+507 6000-0000</strong></p>
-   
-    <div class="redes-sociales">
-      <h3>Síguenos en redes:</h3>
-      <a href="https://instagram.com/jjcomponents" target="_blank"><img src="https://pbs.twimg.com/profile_images/730398192169328640/aN0B-LIm_400x400.jpg" alt="Instagram" style="width: 30px; height: 30px; margin-right: 10px;"> Instagram: @jjcomponents</a><br><br>
-      <a href="https://x.com/jjcomponents" target="_blank"><img src="https://1000marcas.net/wp-content/uploads/2025/04/X-Logo.png" alt="X (Twitter)" style="width: 30px; height: 30px; margin-right: 10px;"> X (Twitter): @jjcomponents</a>
+    <!-- TODOS LOS PRODUCTOS -->
+    <div id="page-products" class="page" style="display:none;">
+      <h2>Todos los Productos</h2>
+      <div class="cards" id="all-products"></div>
     </div>
-  </section>
 
-  <!-- MODAL DE COMPRA -->
-  <div id="modalCompra" class="modal">
-    <div class="modal-content">
-      <h3>¡Producto agregado al carrito!</h3>
-      <p id="modalProducto"></p>
-      <p><strong>Precio: $<span id="modalPrecio"></span></strong></p>
-      <button onclick="cerrarModal()" style="background:#333; margin-top:15px;">Cerrar</button>
+    <!-- VISTA POR CATEGORÍA -->
+    <div id="page-category" class="page" style="display:none;">
+      <h2 id="category-title" class="category-title"></h2>
+      <div class="cards" id="category-products"></div>
     </div>
+
+    <!-- CONTACTO -->
+    <div id="page-contact" class="page" style="display:none;">
+      <h2>Contáctanos</h2>
+      <form id="contactForm" onsubmit="handleSubmit(event)" style="max-width:700px; margin:40px auto; background:white; padding:40px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1);">
+        <input type="text" id="nombre" placeholder="Nombre completo" required>
+        <span class="error" id="error-nombre"></span>
+        <input type="email" id="email" placeholder="Correo electrónico" required>
+        <span class="error" id="error-email"></span>
+        <input type="tel" id="telefono" placeholder="Teléfono (+507)">
+        <textarea id="mensaje" rows="6" placeholder="Escribe tu mensaje..." required></textarea>
+        <span class="error" id="error-mensaje"></span>
+        <button type="submit" class="btn">Enviar Mensaje</button>
+      </form>
+    </div>
+
+    <!-- CARRITO -->
+    <div id="page-cart" class="page" style="display:none;">
+      <h2>Tu Carrito de Compras</h2>
+      <div id="cart-items"></div>
+      <h3>Total: $<span id="cart-total">0.00</span></h3>
+      <button class="btn" onclick="finalizarCompra()" style="margin-top:20px;">Finalizar Compra</button>
+    </div>
+  </main>
+
+  <!-- Carrito flotante -->
+  <div class="cart-icon" onclick="showPage('cart')">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="floatCartCount" style="position:absolute;top:-8px;right:-8px;background:#ef4444;color:white;border-radius:50%;width:24px;height:24px;font-size:0.9rem;display:flex;align-items:center;justify-content:center;">0</span>
   </div>
 
-  <!-- PIE DE PÁGINA (FOOTER) MEJORADO -->
   <footer>
-    <div class="footer-content">
-      <p><strong>J.J Components © 2026</strong> - Todos los derechos reservados</p>
-      <p>Panamá | Tienda de Componentes Electrónicos</p>
-      
-      <div class="footer-links">
-        <a href="#inicio">Inicio</a>
-        <a href="#productos">Productos</a>
-        <a href="#contacto">Contacto</a>
-        <a href="#">Política de Privacidad</a>
-        <a href="#">Términos de Servicio</a>
-      </div>
-      
-    </div>
+    <p><strong>J.J Components © 2026</strong> - Panamá</p>
   </footer>
 
   <script>
-    // Función de búsqueda
-    document.getElementById('searchForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const searchTerm = document.getElementById('searchInput').value.trim();
+    let carrito = [];
+
+    const productos = [
+      // Kits de Electrónica (5)
+      {id:1, nombre:"Kit Arduino Básico", categoria:"kits", precio:39.99, img:"https://m.media-amazon.com/images/I/81hR7vU0xQL._AC_SY879_.jpg"},
+      {id:2, nombre:"Kit Raspberry Pi 5", categoria:"kits", precio:89.99, img:"https://m.media-amazon.com/images/I/81j9KVsffLL._AC_SX466_.jpg"},
+      {id:3, nombre:"Kit Soldadura Profesional", categoria:"kits", precio:45.50, img:"https://m.media-amazon.com/images/I/71whjm4xA9L._AC_SY300_SX300_QL70_FMwebp_.jpg"},
+      {id:4, nombre:"Kit Sensores para Arduino", categoria:"kits", precio:29.99, img:"https://m.media-amazon.com/images/I/91Uvci0R0YL._AC_SY300_SX300_QL70_FMwebp_.jpg"},
+      {id:5, nombre:"Kit Electrónica Avanzado", categoria:"kits", precio:69.99, img:"https://m.media-amazon.com/images/I/81tft1SHPGL._SX522_.jpg"},
+
+      // Microcontroladores (5)
+      {id:6, nombre:"Arduino Uno R3", categoria:"micro", precio:24.99, img:"https://m.media-amazon.com/images/I/51Ci8gnvlAL._AC_SX466_.jpg"},
+      {id:7, nombre:"ESP32 WiFi + Bluetooth", categoria:"micro", precio:18.50, img:"https://m.media-amazon.com/images/I/71R-fZn7S-L._AC_SX466_.jpg"},
+      {id:8, nombre:"Raspberry Pi Pico", categoria:"micro", precio:8.99, img:"https://m.media-amazon.com/images/I/81rXQOvPGEL._AC_SX466_.jpg"},
+      {id:9, nombre:"Arduino Nano", categoria:"micro", precio:19.99, img:"https://m.media-amazon.com/images/I/51Ci8gnvlAL._AC_SX466_.jpg"},
+      {id:10, nombre:"STM32 Development Board", categoria:"micro", precio:34.99, img:"https://stm32-base.org/assets/img/boards/STM32F103C8T6_STM32_Smart_V2.0-1.jpg"},
+
+      // LEDs e Iluminación
+      {id:11, nombre:"Tira LED RGB 5 metros", categoria:"leds", precio:14.99, img:"https://m.media-amazon.com/images/I/71HeXwnzjbL._AC_SX679_.jpg"},
+      {id:12, nombre:"Panel LED WS2812B", categoria:"leds", precio:22.50, img:"https://m.media-amazon.com/images/I/71HeXwnzjbL._AC_SX679_.jpg"},
+      {id:13, nombre:"Kit 100 LEDs de Colores", categoria:"leds", precio:9.99, img:"https://m.media-amazon.com/images/I/71HeXwnzjbL._AC_SX679_.jpg"},
+      {id:14, nombre:"Foco LED RGB Controlable", categoria:"leds", precio:15.99, img:"https://m.media-amazon.com/images/I/71HeXwnzjbL._AC_SX679_.jpg"},
+      {id:15, nombre:"Tira LED Blanca 10m", categoria:"leds", precio:19.99, img:"https://m.media-amazon.com/images/I/71HeXwnzjbL._AC_SX679_.jpg"},
+
+      // Sensores
+      {id:16, nombre:"Sensor Ultrasonido HC-SR04", categoria:"sensores", precio:6.99, img:"https://m.media-amazon.com/images/I/614G1UiD6JL._SL1500_.jpg"},
+      {id:17, nombre:"Sensor de Temperatura DHT11", categoria:"sensores", precio:7.99, img:"https://m.media-amazon.com/images/I/71t6+vsdbiL._SX522_.jpg"},
+      {id:18, nombre:"Sensor PIR Movimiento", categoria:"sensores", precio:5.99, img:"https://m.media-amazon.com/images/I/41mcpzXUTJL._AC_US100_.jpg"},
+      {id:19, nombre:"Sensor de Luz LDR", categoria:"sensores", precio:4.50, img:"https://m.media-amazon.com/images/I/51gtASUZlqL.jpg"},
+      {id:20, nombre:"Sensor de Humedad Suelo", categoria:"sensores", precio:8.99, img:"https://m.media-amazon.com/images/I/61KKmG5JsaL._SX522_.jpg"},
+
+      // Diodos y Transistores
+      {id:21, nombre:"Kit 100 Diodos 1N4007", categoria:"diodos", precio:12.99, img:"https://m.media-amazon.com/images/I/81E1vKxWb7L._SX522_.jpg"},
+      {id:22, nombre:"Transistor TIP120 (5pcs)", categoria:"diodos", precio:9.99, img:"https://m.media-amazon.com/images/I/61OkxPonvXL._SX522_.jpg"},
+      {id:23, nombre:"Kit Diodos Zener Variados", categoria:"diodos", precio:11.50, img:"https://m.media-amazon.com/images/I/71CJJfPS8qL._SX522_.jpg"},
+      {id:24, nombre:"Transistor MOSFET IRF540", categoria:"diodos", precio:14.99, img:"https://m.media-amazon.com/images/I/712Kyh3qJ6L._SX522_.jpg"},
+      {id:25, nombre:"Diodo Rectificador 10A", categoria:"diodos", precio:8.99, img:"https://m.media-amazon.com/images/I/71Hu2VtP3bL._SX522_.jpg"},
+
+      // Herramientas
+      {id:26, nombre:"Multímetro Digital", categoria:"herramientas", precio:29.99, img:"https://m.media-amazon.com/images/I/71jjLxiiGRL._SX522_.jpg"},
+      {id:27, nombre:"Estación de Soldadura", categoria:"herramientas", precio:89.99, img:"https://m.media-amazon.com/images/I/71PHBsAhHNL._AC_SX679_.jpg"},
+      {id:28, nombre:"Set Destornilladores Precisión", categoria:"herramientas", precio:24.99, img:"https://m.media-amazon.com/images/I/819L4k43aSL._AC_SX679_.jpg"},
+      {id:29, nombre:"Alambre Estaño 1mm", categoria:"herramientas", precio:12.50, img:"https://m.media-amazon.com/images/I/716jcbVoqKL._AC_SX679_.jpg"},
+      {id:30, nombre:"Pinzas y Alicates Set", categoria:"herramientas", precio:35.99, img:"https://m.media-amazon.com/images/I/719RBi4s8RL._AC_SX679_.jpg"},
+    ];
+
+    let currentCategory = null;
+
+    function renderProductos(containerId, lista) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      lista.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `
+          <img src="${p.img}" alt="${p.nombre}">
+          <div style="padding:15px;">
+            <h3>${p.nombre}</h3>
+            <p><strong>$${p.precio.toFixed(2)}</strong></p>
+            <button class="btn" onclick="agregarAlCarrito(${p.id})">Agregar al Carrito</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function showPage(page) {
+      document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+      document.getElementById(`page-${page}`).style.display = 'block';
+
+      if (page === 'home') renderProductos('destacados', productos.slice(0, 8));
+      if (page === 'products') renderProductos('all-products', productos);
+      if (page === 'cart') mostrarCarrito();
+    }
+
+    function showCategory(categoria) {
+      currentCategory = categoria;
+      const filtered = productos.filter(p => p.categoria === categoria);
       
-      if (searchTerm === "") {
-        alert("Por favor ingresa un término de búsqueda.");
+      document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+      document.getElementById('page-category').style.display = 'block';
+
+      const titles = {
+        kits: "Kits de Electrónica",
+        micro: "Microcontroladores",
+        leds: "LEDs e Iluminación",
+        sensores: "Sensores",
+        diodos: "Diodos y Transistores",
+        herramientas: "Herramientas",
+      };
+
+      document.getElementById('category-title').textContent = titles[categoria] || "Categoría";
+      renderProductos('category-products', filtered);
+    }
+
+    function agregarAlCarrito(id) {
+      const producto = productos.find(p => p.id === id);
+      carrito.push(producto);
+      actualizarCarrito();
+      alert(` ${producto.nombre} agregado al carrito`);
+    }
+
+    function actualizarCarrito() {
+      const count = carrito.length;
+      document.getElementById('navCartCount').textContent = count;
+      document.getElementById('floatCartCount').textContent = count;
+    }
+
+    function mostrarCarrito() {
+      const container = document.getElementById('cart-items');
+      let total = 0;
+      container.innerHTML = '';
+
+      if (carrito.length === 0) {
+        container.innerHTML = '<p style="text-align:center; padding:40px;">Tu carrito está vacío</p>';
         return;
       }
-      
-      alert("De momento la barra de búsqueda no funciona.\n\nEstamos trabajando para mejorar esta función.");
-      // Redirigir al inicio
-      window.location.href = "#inicio";
-      
-      // Opcional: limpiar el campo
-      document.getElementById('searchInput').value = "";
-    });
 
-    function comprar(producto, precio) {
-      document.getElementById("modalProducto").textContent = producto;
-      document.getElementById("modalPrecio").textContent = precio;
-      document.getElementById("modalCompra").style.display = "block";
+      carrito.forEach(item => {
+        total += item.precio;
+        const div = document.createElement('div');
+        div.style = "display:flex; justify-content:space-between; padding:15px; border-bottom:1px solid #ddd;";
+        div.innerHTML = `<span>${item.nombre}</span><span><strong>$${item.precio.toFixed(2)}</strong></span>`;
+        container.appendChild(div);
+      });
+
+      document.getElementById('cart-total').textContent = total.toFixed(2);
     }
-  
-    function cerrarModal() {
-      document.getElementById("modalCompra").style.display = "none";
+
+    function finalizarCompra() {
+      if (carrito.length === 0) return;
+      alert("🎉 ¡Compra realizada con éxito!\n\nGracias por elegir J.J Components");
+      carrito = [];
+      actualizarCarrito();
+      showPage('home');
     }
-  
-    function crearCuenta(event) {
-      event.preventDefault();
-      alert(" ¡Cuenta creada exitosamente! (Esto es solo una simulación)");
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      alert("✅ Mensaje enviado correctamente. ¡Gracias por contactarnos!");
+      e.target.reset();
     }
+
+    window.onload = () => showPage('home');
   </script>
 </body>
 </html>
